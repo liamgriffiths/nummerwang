@@ -23,15 +23,15 @@ export default class Main extends Component {
 
   start = async () => {
     this.setState({ playing: true, number: random() }, this.sayNumber)
-    const score = await this.tick()
+    const score = await this.play()
     this.setState({ playing: false, score })
   }
 
-  tick = async () => {
+  play = async () => {
     await wait(ONE_SECOND)
     this.setState({ time: this.state.time - ONE_SECOND })
     if (this.state.time > 0) {
-      return await this.tick()
+      return await this.play()
     } else {
       const correct = this.state.correct.length
       const total = correct + this.state.incorrect.length
@@ -43,6 +43,7 @@ export default class Main extends Component {
     e.preventDefault()
     const { number, guess, correct, incorrect } = this.state
     const newState = { number: random(), guess: '' }
+    if (guess === null || guess === '') return
 
     if (+guess === +number) {
       say('wunderbar')

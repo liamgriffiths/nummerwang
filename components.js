@@ -78,4 +78,3 @@ export const RedSection = styled(Section)`
 
 export const GoldSection = styled(Section)`
   background: #FFCC00;
-`
